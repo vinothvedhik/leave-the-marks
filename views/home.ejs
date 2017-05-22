@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Comments</title>
+    <% include partials/head.ejs %>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <% include partials/sidebarMenu.ejs %>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                       <a href="#menu-toggle" class="btn btn-success" id="menu-toggle">Toggle Screen</a><br/><br/>
+                        <% if( typeof(comments) !== 'undefined' ) {%>
+
+                           <% for(var i=0; i < comments.length; i++) { %>
+                               <h1><%- comments[i].title %></h1>
+                               <h4>Created by <code><%=comments[i].author%> on <%-comments[i].created_at.toUTCString()  %> </code></h4><br/><br/>
+                               <p><%- comments[i].summary %>  <b>- Read the full comments <a href='/comments/<%- comments[i].slug%>'>here</a> </b></p>
+
+                               <br/><br/>
+                           <% } %>
+                        <%}%>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <% include partials/jsIncludes.ejs %>
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>

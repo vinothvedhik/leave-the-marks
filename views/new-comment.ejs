@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create your Comments...</title>
+  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <link href="https://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.1/summernote.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.1/summernote.js"></script>
+   <% include partials/head.ejs %>
+</head>
+<body>
+ <div id="wrapper">
+
+      <% include partials/sidebarMenu.ejs %>
+  <div class="row">
+      <div class="container">
+          <blockquote>
+            <h3>Welcome <code><%=session.username%></code>, share your comments here</h3>
+          </blockquote>
+
+          <blockquote>
+            <h3>If you are curious to see how your comment will be shown take a look at this <a target="_blank" href="/comments/johnathons-comment">comment</a></h3>
+          </blockquote>
+
+          <blockquote>
+            <h3>Don't have anything to share? Check these <a href="/comments">comments</a></h3>
+          </blockquote>
+      </div>
+    </div>
+<br/><br/>
+
+    <div class="row">
+        <div class="container">
+           <div class="col-lg-10">
+            <form action="/add-comment" method="post">
+
+                <div class="form-group">
+                   <label for="name" class="col-sm-2 control-label">Name</label>
+                     <div class="col-sm-6">
+                     <input type="text"name="name" required class="form-control" placeholder="Your Name"/>
+
+                     </div>
+                     <br/><br/><br/>
+                     <label for="name" class="col-sm-2 control-label">Email</label>
+                       <div class="col-sm-6">
+                       <input type="text"name="email" required class="form-control" placeholder="Your Email"/>
+
+                       </div>
+                     <br/><br/>
+                     <label for="name" class="col-sm-2 control-label">Title</label>
+                       <div class="col-sm-6">
+                       <input type="text"name="title" required class="form-control" placeholder="comment Title"/>
+
+                       </div>
+                 </div><br/><br/><br/>
+                 <br/><br/>
+
+                 <div class="form-group">
+                                    <label for="message" class="col-sm-2 control-label">Summary</label>
+                                      <div class="col-sm-6">
+                                       <textarea class="form-control" required name="summary" rows="4" placeholder="A short description"></textarea>
+                                      </div>
+                </div><br/><br/><br/><br/><br/><br/>
+
+                <div class="form-group">
+                  <label for="name" class="col-sm-2 control-label">Post</label>
+                   <div class="col-lg-10">
+                    <textarea name="content" id="commentContent" required rows="8" class="form-control"></textarea>
+                   </div>
+                </div>
+
+                <div class="form-group">
+                     <div class="col-sm-offset-6 col-sm-6">
+                       <button type="submit" class="btn btn-primary">Submit your comment</button>
+                     </div>
+                </div>
+
+            </form>
+
+
+            </div>
+        </div>
+    </div>
+  <br/><br/>
+
+  <script>
+    $(document).ready(function() {
+        $('#commentContent').summernote({
+          height:250,
+          toolbar: [
+
+         ['style', ['bold', 'italic', 'underline', 'clear']],
+         ['font', ['strikethrough', 'superscript', 'subscript']],
+         ['fontsize', ['fontsize']],
+         ['color', ['color']],
+         ['para', ['ul', 'ol', 'paragraph']],
+         ['height', ['height']],
+         ['link', ['linkDialogShow', 'unlink']],
+         ['table', ['table']]
+
+                 ]
+        });
+    });
+  </script>
+</body>
+</html>

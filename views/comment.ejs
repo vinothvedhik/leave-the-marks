@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title><%-comment.name%></title>
+    <% include partials/head.ejs %>
+    <style>
+    p{font-size: 16px;}
+    </style>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+      <% include partials/sidebarMenu.ejs %>
+
+
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                      <a href="#menu-toggle" class="btn btn-success" id="menu-toggle">Toggle Screen</a><br/><br/>
+                       <h1><%-comment.title%></h1>
+                       <h4>Created by <code><%=comment.author%> on <%-comment.created_at.toUTCString()  %> </code></h4><br/><br/>
+                         <br/><br/>
+                       <div>
+                        <h1>Name: <%-comment.name%></h1>
+                       </div>
+                          <br/>
+                       <%-comment.content%>
+                          <br/><br/>
+                       <% if( comment.comments.length > 0 ) {%>
+                            <h1>Comments :</h1><br/>
+                       <%}%>
+                       <% for(var i=0; i < comment.comments.length; i++) { %>
+                                 <p><%- comment.comments[i].body %></p>
+                                 <h4>Commented by <code><%=comment.comments[i].commented_by%> on <%- comment.comments[i].date.toUTCString()  %></code></h4>
+                                 <br/><br/>
+                       <% } %>
+                       <% if( typeof(session.loggedIn) !== 'undefined' ) {%>
+                         <form method="post" action="/comments/<%-comment.slug%>/saveComment">
+                           <div class="form-group">
+                               <label for="message" class="col-sm-2 control-label">Add your comments: </label>
+                                   <div class="col-sm-6">
+                                      <textarea class="form-control" required name="user_comment" rows="4" placeholder="Add your commments "></textarea>
+                                   </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="">
+                                <button type="submit" class="btn btn-primary">Submit Comment</button>
+                              </div>
+                            </div>
+                         </form>
+                       <%}%>
+
+                    </div>
+              </div>
+          </div>
+      </div>
+
+    </div>
+
+    <% include partials/jsIncludes.ejs %>
+
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>
